@@ -1,9 +1,9 @@
 echo Enter the limit
 read n
 echo PATTERN
-for((i=1;i<=n;i++))
+for((i=1;i<=$n;i++))
 do
-for((j=1;j<=i;j++))
+for((j=1;j<=$i;j++))
 do
 echo -n "$"
 done

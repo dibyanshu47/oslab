@@ -1,7 +1,6 @@
 echo SYSTEM INFORMATION
-echo Hello, $(logname)
+echo Hello, $(whoami)
 echo Current Date is = $(date)
-echo User is 'Who I am'
 echo Current Directory = $(pwd)
 echo Network Name and Node Name = $(uname -n)
 echo Kernel Name = $(uname -s)

@@ -1,15 +1,11 @@
 echo Enter the limit
 read n
 echo PATTERN
-i=1
-while [ $i -le $n ]
+for((i=1;i<=n;i++))
 do
-j=1
-while [ $j -le $i ]
+for((j=1;j<=i;j++))
 do
 echo -n "$"
-j=`expr $j + 1`
 done
 echo ""
-i=`expr $i + 1`
 done

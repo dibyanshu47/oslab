@@ -7,7 +7,7 @@ read o
 case $o in
     "+") echo "$a + $b = `expr $a + $b`";;
     "-") echo "$a - $b = `expr $a - $b`";;
-    "*") echo "$a * $b = `expr $a * $b`";;
+    "*") echo "$a * $b = `expr $a \* $b`";;
     "/") echo "$a / $b = `expr $a / $b`";;
     *) echo "INVALID OPERATOR"
 esac

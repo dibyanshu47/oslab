@@ -1,52 +1,41 @@
 #include<stdio.h>
-struct paging
+#include<conio.h>
+void main()
 {
-	int frameNumber, valid;
-};
-int main()
-{
-	int noOfPages = 0, baseAddress = 0, noOfFrames = 0, sizeOfMM = 0, sizeOfLM = 0, FrameSize = 0, physicalAddress = 0, disp = 0, pageNo = 0, logicalAddress = 0, i;
-	paging pageTable[10], frameTable[10];
-	printf("Program for Paging techniques - Fixed Size partition");
-	printf("\n\nEnter the base address of physical memory: ");
-	scanf("%d", &baseAddress);
-	printf("\nEnter the size of Main Memory: ");
-	scanf("%d", &sizeOfMM);
-	printf("\nEnter the size of Main Memory Frame: ");
-	scanf("%d", &FrameSize);
-	noOfFrames = sizeOfMM / FrameSize;
-	printf("\nTotal no. of frames in Main Memory is %d", noOfFrames);
-	printf("\n Enter the size of Logical Memory: ");
-	scanf("%d", &sizeOfLM);
-	noOfPages = sizeOfLM / FrameSize;
-	printf("\n Total no. of pages in Logical Memory is %d", noOfPages);
-	printf("\n Enter the frame values in Page Table\n");
-	for (int i = 0; i < noOfPages; i++)
+	int ms, ps, nop, np, rempages, i, j, x, y, pa, offset;
+	int s[10], fno[10][20];
+	clrscr();
+	printf("\nEnter the memory size -- ");
+	scanf("%d", &ms);
+	printf("\nEnter the page size -- ");
+	scanf("%d", &ps);
+	nop = ms / ps;
+	printf("\nThe no. of pages available in memory are -- %d ", nop);
+	printf("\nEnter number of processes -- ");
+	scanf("%d", &np);
+	rempages = nop;
+	for (i = 1; i <= np; i++)
 	{
-		while (1)
+		printf("\nEnter no. of pages required for p[%d]-- ", i);
+		scanf("%d", &s[i]);
+		if (s[i] > rempages)
 		{
-			printf("\n Page %d is stored in frame number:", i);
-			scanf("%d", pageTable[i].frameNumber);
-			pageTable[pageTable[i].frameNumber].valid = 1;
-			frameTable[pageTable[i].frameNumber].valid = i;
+			printf("\nMemory is Full");
 			break;
 		}
+		rempages = rempages - s[i];
+		printf("\nEnter pagetable for p[%d] --- ", i);
+		for (j = 0; j < s[i]; j++)
+			scanf("%d", &fno[i][j]);
 	}
-	printf("\n \t PAGE TABLE");
-	printf("\nIndex|\t\tFrame Number|\tValid_Bit|\n\n");
-	for (i = 0; i < noOfPages; i++)
-	{
-		printf("%d\t\t%d\t\t%d\n", i, pageTable[i].frameNumber, pageTable[pageTable[i].frameNumber].valid);
+	printf("\nEnter Logical Address to find Physical Address ");
+	printf("\nEnter process no. and pagenumber and offset -- ");
+	scanf("%d %d %d", &x, &y, &offset);
+	if (x > np || y >= s[i] || offset >= ps)
+		printf("\nInvalid Process or Page Number or offset");
+	else
+	{	pa = fno[x][y] * ps + offset;
+		printf("\nThe Physical Address is -- %d", pa);
 	}
-
-	for (i = 0; i < noOfPages; i++)
-	{
-		printf("Enter the logical addresss for mapping process:");
-		scanf("%d", &logicalAddress);
-		pageNo = logicalAddress / FrameSize;
-		disp = logicalAddress % FrameSize;
-		physicalAddress =  baseAddress + ((pageTable[pageNo].frameNumber - 1) * FrameSize) + disp;
-		printf("Physical Address value is %d\n", physicalAddress);
-	}
-	return 0;
+	getch();
 }
